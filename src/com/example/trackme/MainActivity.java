@@ -34,12 +34,12 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 	protected String latitude,longitude; 
 	protected boolean gps_enabled,network_enabled;
 	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    	@Override
+    	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
        
-        //location sample code
+        //location sample code + Need to work on fetching location via GPS/Internet too Now app is crashing without internet
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         
@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				// Blindly sending it to my no.
 				sendSMS("+917259250682",message);
 			}
 		});
@@ -63,21 +63,21 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
         }
     
    
-    private void sendSMS(String phoneNumber, String message)
-    {        
-        String SENT = "SMS_SENT";
-        String DELIVERED = "SMS_DELIVERED";
+    	private void sendSMS(String phoneNumber, String message)
+    	{        
+        	String SENT = "SMS_SENT";
+        	String DELIVERED = "SMS_DELIVERED";
 
-        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,
-            new Intent(SENT), 0);
+        	PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,
+        	 new Intent(SENT), 0);
 
-        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0,
-            new Intent(DELIVERED), 0);
+        	PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0,
+            	new Intent(DELIVERED), 0);
 
-        //---when the SMS has been sent---
-        registerReceiver(new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context arg0, Intent arg1) {
+        	//---when the SMS has been sent---
+        	registerReceiver(new BroadcastReceiver(){
+            	@Override
+            	public void onReceive(Context arg0, Intent arg1) {
                 switch (getResultCode())
                 {
                     case Activity.RESULT_OK:
@@ -173,7 +173,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+	 public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
         }
@@ -188,7 +188,8 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 
 	@Override
 	public void onLocationChanged(Location location) {
-		message=("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());	// TODO Auto-generated method stub
+		message=("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());	
+		// Simplest way to fetch location- Saurav
 		
 	}
 
